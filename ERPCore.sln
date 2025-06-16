@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33530.505
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ERP.EF", "ERP.EF\ERP.EF.csproj", "{1D84542A-B82F-414D-B966-1AF98BF4E080}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cafe.EF", "Cafe.EF\Cafe.EF.csproj", "{1D84542A-B82F-414D-B966-1AF98BF4E080}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{F65B56D8-EFEA-4253-AE66-3E1FA6E3B39D}"
 EndProject
@@ -13,15 +13,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Host", "Host", "{09596CDB-1
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{70C4F030-9D93-40F0-AD70-C60862B0CD31}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ERP.Repository", "ERP.Repository\ERP.Repository.csproj", "{271666EB-20CC-49B5-BA36-F388A69BB0A2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cafe.Repository", "Cafe.Repository\Cafe.Repository.csproj", "{271666EB-20CC-49B5-BA36-F388A69BB0A2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ERP.IoC", "ERP.IoC\ERP.IoC.csproj", "{A7592334-D469-4A62-BB4E-6A10A3C8DD4A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cafe.IoC", "Cafe.IoC\Cafe.IoC.csproj", "{A7592334-D469-4A62-BB4E-6A10A3C8DD4A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ERP.Services", "ERP.Services\ERP.Services.csproj", "{EA2F2DAB-AB42-4154-B1BE-1F2CD8F19192}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cafe.Services", "Cafe.Services\Cafe.Services.csproj", "{EA2F2DAB-AB42-4154-B1BE-1F2CD8F19192}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ERP.VM", "ERP.VM\ERP.VM.csproj", "{8E686F06-E851-4CBB-8CAF-AD4CD84E0EF1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cafe.VM", "Cafe.VM\Cafe.VM.csproj", "{8E686F06-E851-4CBB-8CAF-AD4CD84E0EF1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ERP.WEB", "ERP.WEB\ERP.WEB.csproj", "{8B0D9D2D-2782-4AD3-98BA-9A153FC3BBAE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cafe.WEB", "Cafe.WEB\Cafe.WEB.csproj", "{8B0D9D2D-2782-4AD3-98BA-9A153FC3BBAE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

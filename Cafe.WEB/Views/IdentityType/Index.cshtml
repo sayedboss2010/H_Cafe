@@ -1,0 +1,103 @@
+﻿@* @model List<Cafe.VM.HrIdentityTypeVm>
+    @{
+        var langCookies = Context.Request.Cookies.FirstOrDefault(c => c.Key == "Lang").Value;
+        var lang = string.IsNullOrEmpty(langCookies) ? "ar" : langCookies;
+
+        ViewData["Title"] = lang == "ar" ? "أنواع الهوية" : "IdentityType";
+    }
+    <div class="card my-5 shadow-blur">
+        <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 border-radius-lg">
+            <div class="shadow-blur border-radius-lg p-4">
+                <div class="row align-items-center">
+                    <div class=" ps-3 col-lg-6 col-md-12 col-sm-12">
+                        <form class="text-start" style="display:flex;">
+                            <div class="input-group input-group-outline my-3 w-100 searchDiv position-relative">
+                                <label class="form-label">@(lang == "ar" ? "بحث بالاسم" : "Search with name")</label>
+                                <input type="text" class="form-control" id="SearchString" />
+                                <a href="javascript:;" id="searchBTN" class="btn btn-search ">
+                                    <i class="fa fa-search"></i>
+                                </a>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-lg-6 col-md-12 col-sm-12 header-buttons">
+                        @if (Model.Any())
+                        {
+                            <a href="javascript:;" class="btn btn-dribbble btnPrint">
+                                <i class="fa fa-print"></i>&nbsp;&nbsp;@(lang == "ar" ? "طباعة" : "Print")
+                            </a>
+                            <a asp-action="ExportToExcel" asp-route-term="@ViewBag.Search" class="btn btn-success ">
+                                <i class="fa fa-download"></i>&nbsp;&nbsp;@(lang == "ar" ? "ملف الأكسل" : "Excel File")
+                            </a>
+
+                        }
+                        <a href="javascript:;" class="btn btn-twitter  btnAdd" data-lang="@lang">
+                            <i class="fa fa-plus"></i>&nbsp;&nbsp;@(lang == "ar" ? "إضافة" : "Add")
+                        </a>
+                        <a href="javascript:;" class="btn btn-slack btnRefresh" data-lang="@lang">
+                            <i class="fa fa-refresh"></i>&nbsp;&nbsp; @(lang == "ar" ? "تحديث" : "Refresh")
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="card-body pt-5">
+            <div id="divdata">
+                <partial name="_PartialAllIdentityType" for="@Model" />
+            </div>
+        </div>
+    </div>
+
+    <div id="addIdentityTypeModal" class="modal fade" role="dialog">
+        <div class="modal-dialog custom-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title text-center">
+                        <span id="modalTitle"></span>
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <input hidden id="IdentityTypeId" />
+                    <form class="text-start">
+                        <div class="input-group input-group-outline my-3 w-100 divArName">
+                            <label class="form-label">@(lang=="ar" ? "الاسم بالعربية":"Arabic Name")</label>
+                            <input type="text" class="form-control" id="txtArName" />
+                        </div>
+                        <div class="input-group input-group-outline my-3 w-100 divEnName">
+                            <label class="form-label">@(lang=="ar" ? "الاسم بالإنجليزية":"English Name")</label>
+                            <input type="text" class="form-control" id="txtEnName" />
+                        </div>
+                        
+
+                        <br />
+                        <div class="text-center">
+                            <span class="label label-danger alertEmpty" style="color:red;display:none;">
+                                @(lang == "ar" ? "يجب إدخال الاسم باللغة العربية والإنجليزية" : "Names can't be empty")
+                            </span>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default btnModalClose">إغلاق</button>
+                    <button type="button" id="btnAddEditUniv" class="btn btn-success">حفظ</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @section Scripts{
+        <link href="~/lib/vendor/select2/dist/css/select2.css" rel="stylesheet" />
+        <script src="~/lib/vendor/select2/dist/js/select2.full.js"></script>
+
+        <script src="~/modules/IdentityType-module.js"></script>
+
+        <script>
+        $(document).ready(function () {
+            $('.drpSelectFac').select2();
+        });
+        </script>
+    }
+ *@

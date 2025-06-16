@@ -1,0 +1,46 @@
+﻿@model List<Cafe.VM.ViewModels.DrawMenuResulVm>
+
+@{
+    var disGroup = Model.GroupBy(d =>
+                new
+                {
+                    GroupID = d.GroupID,
+                    GroupName = d.GroupName,
+                }).Select(a => new
+                {
+                    GroupID = a.Key.GroupID,
+                    GroupName = a.Key.GroupName
+                });
+
+    foreach (var item in disGroup)
+    {
+        var Mnue_data = Model.Where(a => a.GroupID == item.GroupID).ToList();
+
+        <li class="nav-item">
+            <a data-bs-toggle="collapse" href="#apiExamples" aria-controls="apiExamples" aria-expanded="false"
+               class="nav-link collapsed" type="button">
+                <div class="text-white text-center ms-2 d-flex align-items-center justify-content-center">
+                    <i class="material-icons opacity-10">settings</i>
+                </div>
+                <span class="nav-link-text ms-1">@item.GroupName</span>
+            </a>
+            <div id="apiExamples" class="collapse" style="">
+                <ul class="nav">
+
+                    @foreach (var mod in Mnue_data)
+                    {                                               
+                        <li class="nav-item opacity-75">
+                            <a class="nav-link text-white"
+                               href="@mod.MenuURL">
+                                <div class="text-white text-center ms-2 d-flex align-items-center justify-content-center">
+                                    <i class="material-icons opacity-10">apartment</i>&nbsp;
+                                </div>
+                                <span class="nav-link-text ms-1">@mod.MenuTitle</span>
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </li>
+    }
+}
