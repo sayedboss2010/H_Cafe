@@ -1,0 +1,298 @@
+﻿@{
+    var langCookies = Context.Request.Cookies.FirstOrDefault(c => c.Key == "Lang").Value;
+    var lang = string.IsNullOrEmpty(langCookies) ? "ar" : langCookies;
+
+    ViewData["Title"] = lang == "ar" ? " القائمة " : " check list";
+}
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f5f5f5;
+        margin: 20px;
+    }
+
+    h2 {
+        text-align: center;
+        color: #333;
+    }
+
+    table {
+        border-collapse: separate;
+        border-spacing: 0;
+        width: 100%;
+        direction: rtl;
+        background-color: #fff;
+        border: 2px solid #444;
+    }
+
+    th, td {
+        border-left: 1px solid #ccc;
+        border-bottom: 1px solid #ccc;
+        padding: 10px;
+        text-align: center;
+    }
+
+        th:first-child, td:first-child {
+            border-right: 1px solid #ccc;
+        }
+
+    tr:last-child td {
+        border-bottom: none;
+    }
+
+    th {
+        background-color: #004d7a;
+        color: white;
+        font-weight: bold;
+    }
+
+    .ok {
+       
+        color: #0fc515;
+    }
+
+    .fault {
+     
+        color: #e31025;
+    }
+</style>
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 my-2 pt-3">
+        <div class="card">
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10" style="text-align:center">
+                        @if (ViewBag.Error != null && ViewBag.Error != "")
+                        {
+                            <div class="alert alert-danger alert-dismissible fade show">
+                                <button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                <b class="alert-link"> @ViewBag.Error </b>
+                            </div>
+                        }
+                        @if (ViewBag.Success != null && ViewBag.Success != "")
+                        {
+                            <div class="alert alert-success alert-dismissible fade show">
+                                <button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                <b class="alert-link"> @ViewBag.Success </b>
+                            </div>
+                        }
+                    </div>
+                </div>
+                <form class="text-start" asp-action="SaveMoveOut" method="post" enctype="multipart/form-data">
+                    <input hidden />
+                    <div class="shadow-blur">
+                        <div class="card-header1">
+                            <center>
+                            <h5> البيانات الاساسية </h5>
+                            </center>
+                        </div>
+                        <div class="row">
+                            <div class="   col-md-3 col-sm-12"></div>
+                            <div class="   col-md-6 col-sm-12">
+                                <div class="input-group input-group-outline my-3 w-100 mx-sm-1 divTxt is-filled me-2 selected-option">
+                                    <label class="form-label">@(lang == "ar" ? " الموقع " : "  الموقع")</label>
+
+                                    <select class="form-control" id="LocationID" asp-items="@(SelectList)ViewBag.ListDropLocation">
+                                        <option value="0">@(lang == "ar" ? " ---------- " : " ---------- ")</option>
+                                    </select>
+
+                                </div>
+                            </div>
+                            <div class="   col-md-3 col-sm-12"></div>
+                        </div>
+                        <div class="row">
+                            <div class="   col-md-3 col-sm-12"></div>
+                            <div class="   col-md-6 col-sm-12">
+                                <div class="input-group input-group-outline my-3 w-100 mx-sm-1 divTxt is-filled me-2 selected-option">
+                                    <label class="form-label">@(lang == "ar" ? "نوع المعدة " : "  نوع المعدة")</label>
+
+                                    <select class="form-control" id="EquipmentTypeID" asp-items="@(SelectList)ViewBag.ListDropEquipmentTypes">
+                                        <option value="0">@(lang == "ar" ? " ---------- " : " ---------- ")</option>
+                                    </select>
+
+                                </div>
+                            </div>
+                            <div class="   col-md-3 col-sm-12"></div>
+                        </div>
+                        <div class="row">
+                            <div class="   col-md-3 col-sm-12"></div>
+                            <div class="   col-md-6 col-sm-12">
+                                <div class="input-group input-group-outline my-3 w-100 mx-sm-1 divTxt is-filled me-2 selected-option">
+                                    <label class="form-label">@(lang == "ar" ? " المعدة " : "   المعدة")</label>
+
+                                    <select class="form-control" id="EquipmentID" asp-items="@(SelectList)ViewBag.ListDropEquipment">
+                                        <option value="0">@(lang == "ar" ? "  ---------- " : " ---------- ")</option>
+                                    </select>
+
+                                </div>
+                            </div>
+                            <div class="   col-md-3 col-sm-12"></div>
+                        </div>
+                       
+                        <div class="row">
+                            <div class="   col-md-3 col-sm-12"></div>
+                            <div class="   col-md-6 col-sm-12">
+                                <div class="input-group input-group-outline my-3 w-100 mx-sm-1 divTxt is-filled me-2 selected-option">
+                                    <label class="form-label">@(lang == "ar" ? "الخطة  " : " الخطة")</label>
+
+                                    <select class="form-control" id="PlanID" asp-items="@(SelectList)ViewBag.ListDropPlan">
+                                        <option value="0">@(lang == "ar" ? " ---------- " : " ---------- ")</option>
+                                    </select>
+
+                                </div>
+                            </div>
+                            <div class="   col-md-3 col-sm-12"></div>
+                        </div>
+                        </div>
+
+                    <br />
+                    <center>
+                    <button type="button" id="btnSearch" class="btn  edit-btn">بحث</button>
+                    </center>
+                </form>
+
+                <div id="resultNo" style="display:none">
+                    <center>
+                        <h3>لا يوجد بيانات</h3>
+                    </center>
+                </div>
+                <div id="resultDiv" style="display:none">
+                    
+                    <table id="tbl" style="width: 102%;padding: -14px;margin: 4px; " border="1" >
+                        <thead class="thead-style">
+                            <tr id="tableHeaderRow">
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+
+                    
+                </div>
+
+                <input type="hidden" id="checklistid" />
+                <input type="hidden" id="checklistName" />
+                <div id="addUnivercityModal" class="modal fade" role="dialog">
+                    <div class="modal-dialog custom-dialog" style="width:1000px !important">
+                        <div class="modal-content" style="width:1000px !important">
+                            <div class="modal-header" style="width:1000px !important">
+                                <h4 class="modal-title text-center">
+                                    <span id="modalTitle"></span>
+                                </h4>
+                            </div>
+                            <div class="modal-body" style="width:1000px !important">
+                                <input hidden id="univercityId" />
+                                <form class="text-start">
+
+
+                                    <div class="shadow-blur row  p-t-5">
+                                        <div class="card-header1">
+                                            <center>
+                                            <h5> بيانات جزء الصيانة </h5>
+                                            </center>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-3 col-sm-3">
+                                                <div class="input-group input-group-outline my-3 w-100 mx-sm-1 searchDiv is-filled position-relative selected-option">
+
+                                                    <label class="form-label">@(lang == "ar" ? " نوع جزء الصيانة " : "   نوع جزء الصيانة")</label>
+
+                                                    <select class="form-control" id="SparePartTypeID" asp-items="@(SelectList)ViewBag.ListDropSparePartType">
+                                                                <option value="0">@(lang == "ar" ? "  ---------- " : " ---------- ")</option>
+                                                       
+                                                            </select>
+
+                                                   @*  <select class="form-control" id="SparePartTypeID">
+                                                        
+                                                    </select> *@
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-3 col-sm-3">
+                                                <div class="input-group input-group-outline my-3 w-100 mx-sm-1 divTxt is-filled position-relative selected-option">
+                                                    <label class="form-label">@(lang == "ar" ? "جزء الصيانة" : "جزء الصيانة")</label>
+                                                    <select class="form-control" id="SparePartID">
+                                                        <option value="0">@(lang == "ar" ? "----------" : "----------")</option>
+                                                    </select>
+
+                                                </div>
+                                            </div>
+
+
+                                            <div class="col-md-3 col-sm-3">
+                                                <div class="input-group input-group-outline my-3 w-100 mx-sm-1 searchDiv is-filled position-relative ">
+                                                    <label class="form-label">@(lang == "ar" ? "العدد  " : "العدد ")</label>
+                                                    <input type="number" id="countid" class="form-control" />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3 col-sm-3">
+                                                <div class="input-group input-group-outline my-3 w-100 mx-sm-1 searchDiv is-filled position-relative ">
+                                                    <label class="form-label">@(lang == "ar" ? "ملاحظات  " : "ملاحظات ")</label>
+                                                    <input type="text" id="Note" class="form-control" />
+                                                </div>
+                                            </div>
+                                           
+                                        </div>
+                                        <div class="row">
+                                        <div class="col-md-3 col-sm-3">
+                                            <center>
+                                                <div class="form-group form-primary f-primary col-md-4 text-center">
+                                                    <center>
+                                                    <button type="button" id="btnAddproduct" class="btn btnAddproduct">إضافة</button>
+                                                        </center>
+                                                </div>
+                                            </center>
+                                        </div>
+                                        </div>
+                                        
+                                        <div class="shadow-blur row">
+
+                                            <div class="card-body pt-5">
+                                                <div class="table-responsive p-0" id="printDiv">
+                                                    <table id="tblproduct" class="table align-items-center mb-0">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>@(lang == "ar" ? " نوع جزء الصيانة" : "  نوع جزء الصيانة")</th>
+                                                                <th>@(lang == "ar" ? "جزء الصيانة" : "جزء الصيانة")</th>
+                                                                <th>@(lang == "ar" ? "العدد" : "العدد")</th>
+                                                                <th>@(lang == "ar" ? "ملاحظات" : "ملاحظات")</th>
+                                                                <th>@(lang == "ar" ? " حذف " : " Delete ")</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+
+                                    </div>
+                                    <br />
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default btnModalClose">إغلاق</button>
+                                <button type="button" class="btn btn-default btnsava">حفظ</button>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script src="~/jquery/3.7.0/Content/Scripts/jquery-3.7.0.min.js"></script>
+<script src="~/modules/checllist-module.js"></script>

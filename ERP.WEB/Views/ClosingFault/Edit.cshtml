@@ -1,0 +1,121 @@
+﻿@{
+    @model ERP.VM.ViewModels.ClosingFaultVm
+
+    var langCookies = Context.Request.Cookies.FirstOrDefault(c => c.Key == "Lang").Value;
+    var lang = string.IsNullOrEmpty(langCookies) ? "ar" : langCookies;
+
+    ViewData["Title"] = lang == "ar" ? " القائمة " : " check list";
+}
+
+
+
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 my-2 pt-3">
+        <div class="card">
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10" style="text-align:center">
+                        @if (ViewBag.Error != null && ViewBag.Error != "")
+                        {
+                            <div class="alert alert-danger alert-dismissible fade show">
+                                <button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                <b class="alert-link"> @ViewBag.Error </b>
+                            </div>
+                        }
+                        @if (ViewBag.Success != null && ViewBag.Success != "")
+                        {
+                            <div class="alert alert-success alert-dismissible fade show">
+                                <button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                <b class="alert-link"> @ViewBag.Success </b>
+                            </div>
+                        }
+                    </div>
+                </div>
+                <form class="text-start" asp-action="Edit" method="post" enctype="multipart/form-data">
+                   
+                    <div class="shadow-blur">
+                        <div class="card-header1">
+                            <center>
+                            <h5> بيانات العطل   </h5>
+                            </center>
+                        </div>
+                    
+                        <input type="hidden" name="CheckListMasterDetailID" value="@Model.CheckListMasterDetails[0].CheckListMasterDetailID" />
+                        <div class="row">
+                            <div class="col-md-4 col-sm-12">
+                                <div class="input-group input-group-outline my-3 w-100 mx-sm-1 divTxt is-filled me-2 ">
+                                    <label class="form-label">@(lang == "ar" ? "نوع قطع الغيار" : "نوع قطع الغيار")</label>
+                                    <input type="text" disabled value="@(lang == "ar" ? Model.CheckListMasterDetails[0].SparePartTypeName : Model.CheckListMasterDetails[0].SparePartTypeName)" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-12">
+                                <div class="input-group input-group-outline my-3 w-100 mx-sm-1 divTxt is-filled me-2 ">
+                                    <label class="form-label">@(lang == "ar" ? "قطع الغيار" : "قطع الغيار")</label>
+                                    <input type="text" disabled value="@Model.CheckListMasterDetails[0].SparePartName" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-12">
+                                <div class="input-group input-group-outline my-3 w-100 mx-sm-1 divTxt is-filled me-2 ">
+                                    <label class="form-label">@(lang == "ar" ? " الكمية" : "الكمية")</label>
+                                    <input type="text" disabled value="@Model.CheckListMasterDetails[0].Quantity" class="form-control" />
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                        <br /><br />
+                        <div class="row">
+                            <div class="col-md-3 col-sm-12">
+                                
+                            </div>
+                            <div class="col-md-6 col-sm-12">
+                                <div class="input-group input-group-outline my-3 w-100 mx-sm-1 divTxt is-filled me-2">
+                                    <label class="form-label">@(lang == "ar" ? " الصورة قبل العطل " : "الصورة قبل العطل")</label>
+
+                                    <input type="file" name="before" id="before" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-12">
+                               
+                            </div>
+
+
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3 col-sm-12">
+                            </div>
+                            <div class="col-md-6 col-sm-12">
+                                <div class="input-group input-group-outline my-3 w-100 mx-sm-1 divTxt is-filled me-2">
+                                    <label class="form-label">@(lang == "ar" ? " الصورة بعد العطل " : "الصورة بعد العطل")</label>
+
+                                    <input type="file" name="After" id="After" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-12">
+                            </div>
+                        </div>
+                    </div>
+
+                    <br /><br />
+                    <div class="row shadow-blur">
+                        <div class="col-md-4"></div>
+                        <div class=" col-md-4 text-center">
+                            <button type="submit" class="btn btn-grd-primary btn-slack  btnAdd">
+                                <i class="fa fa-check"></i>&nbsp;&nbsp;@(lang == "ar" ? "حفظ" : "Save")
+                            </button>
+                        </div>
+                        <div class="col-md-4"></div>
+                    </div>
+                    <br />
+                    <br />
+                    <br />
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,294 @@
+﻿@{
+    @model List<ERP.VM.ViewModels.ClosingFaultVm>
+
+    var langCookies = Context.Request.Cookies.FirstOrDefault(c => c.Key == "Lang").Value;
+    var lang = string.IsNullOrEmpty(langCookies) ? "ar" : langCookies;
+
+    ViewData["Title"] = lang == "ar" ? " القائمة " : " check list";
+}
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f5f5f5;
+        margin: 20px;
+    }
+
+    h2 {
+        text-align: center;
+        color: #333;
+    }
+
+    table {
+        border-collapse: separate;
+        border-spacing: 0;
+        width: 100%;
+        direction: rtl;
+        background-color: #fff;
+        border: 2px solid #444;
+    }
+
+    th, td {
+        border-left: 1px solid #ccc;
+        border-bottom: 1px solid #ccc;
+        padding: 10px;
+        text-align: center;
+    }
+
+        th:first-child, td:first-child {
+            border-right: 1px solid #ccc;
+        }
+
+    tr:last-child td {
+        border-bottom: none;
+    }
+
+    th {
+        background-color: #004d7a;
+        color: white;
+        font-weight: bold;
+    }
+
+    .ok {
+        color: #0fc515;
+    }
+
+    .fault {
+        color: #e31025;
+    }
+</style>
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 my-2 pt-3">
+        <div class="card">
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10" style="text-align:center">
+                        @if (ViewBag.Error != null && ViewBag.Error != "")
+                        {
+                            <div class="alert alert-danger alert-dismissible fade show">
+                                <button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                <b class="alert-link"> @ViewBag.Error </b>
+                            </div>
+                        }
+                        @if (ViewBag.Success != null && ViewBag.Success != "")
+                        {
+                            <div class="alert alert-success alert-dismissible fade show">
+                                <button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                <b class="alert-link"> @ViewBag.Success </b>
+                            </div>
+                        }
+                    </div>
+                </div>
+                <form class="text-start" asp-action="SaveMoveOut" method="post" enctype="multipart/form-data">
+                    <input hidden />
+                    <div class="shadow-blur">
+                        <div class="card-header1">
+                            <center>
+                                <h5> معدات اللازمة للصيانة </h5>
+                            </center>
+                        </div>
+                       
+                    </div>
+
+                    <br />
+                    <div id="resultDiv">
+
+                        <table id="tbl"  style="width: 102%;padding: -14px;margin: 4px; " border="1">
+    <thead>
+        <tr>
+           <th>القائمة</th>
+                                  @*   <th>نوع المعدة</th> *@
+                                    <th>المعدة</th>
+                                    <th>الموقع</th>
+                                    <th>الخطة</th>
+                                    <th>المسئول</th>
+                                    <th>تاريخ العطل</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <!-- السطر الأساسي -->
+            <tr class="table-primary" style="background-color:#b7b1c7">
+                   <td>@item.CheckItem</td>
+                                        @* <td>@item.TypeName</td> *@
+                                        <td>@item.EquipmentName</td>
+                                        <td>@item.LocationName</td>
+                                        <td>@item.planName</td>
+                                        <td>@item.CreatedBy</td>
+                                        <td>@item.CreatedAt</td>
+            </tr>
+
+            <!-- سطر التفاصيل -->
+            <tr>
+                <td colspan="6">
+                    <div class="p-2">
+                        <strong>تفاصيل القطع المستخدمة:</strong>
+                        <table class="table table-sm table-striped table-bordered mb-0 w-100">
+                            <thead>
+                                <tr style="background-color:#6fa2eb  !important">
+                                 
+
+                                 <th style="width: 20%;">نوع قطع الغيار</th>
+                                <th style="width: 40%;">قطع الغيار</th>
+                                <th style="width: 15%;">الكمية</th>
+                                <th style="width: 25%;" colspan="3">اصلاح العطل</th> <!-- لتكملة الصف -->
+                            </thead>
+                            <tbody>
+                                @foreach (var detail in item.CheckListMasterDetails)
+                                {
+                                    <tr style="background-color:#f8fdff !important">
+                                        
+
+                                        <td>@detail.SparePartTypeName</td>
+                                                            <td>@detail.SparePartName</td>
+                                                            <td>@detail.Quantity</td>
+                                                         <td colspan="3" ><a href="/ClosingFault/Edit/@detail.CheckListMasterDetailID">تعديل</a> </td>  
+                                    </tr> 
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+                     @*    <table id="tbl" style="width: 102%;padding: -14px;margin: 4px; " border="1">
+
+                            <thead class="thead-style">
+                                <tr>
+                                    <th>القائمة</th>
+                                    <th>نوع المعدة</th>
+                                    <th>المعدة</th>
+                                    <th>الموقع</th>
+                                    <th>الخطة</th>
+                                    <th>المسئول</th>
+                                    <th>تاريخ العطل</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@item.CheckItem</td>
+                                        <td>@item.TypeName</td>
+                                        <td>@item.EquipmentName</td>
+                                        <td>@item.LocationName</td>
+                                        <td>@item.planName</td>
+                                        <td>@item.CreatedBy</td>
+                                        <td>@item.CreatedAt</td>
+                                        <td>
+                                            <!-- جدول التفاصيل -->
+                                            <table id="tbl" style="width: 102%;padding: -14px;margin: 4px; " border="1">
+                                                <thead>
+                                                    <tr>
+                                                        <th>نوع قطع الغيار</th>
+                                                        <th>قطع الغيار</th>
+                                                        <th>العدد</th>
+                                                        <th>تعديل العطل</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach (var detail in item.CheckListMasterDetails)
+                                                    {
+                                                        <tr>
+                                                            <td>@detail.SparePartTypeName</td>
+                                                            <td>@detail.SparePartName</td>
+                                                            <td>@detail.Quantity</td>
+                                                            <td>@detail.CheckListMasterDetailID</td>
+
+                                                        </tr>
+                                                    }
+                                                </tbody>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table> *@
+
+
+@*                         <table id="tbl" style="width: 102%;padding: -14px;margin: 4px; " border="1">
+                           
+                            <thead class="thead-style">
+                                <tr>
+                                    <th>القائمة</th>
+                                    <th>نوع المعدة</th>
+                                    <th>المعدة</th>
+                                    <th>الموقع</th>
+                                    <th>الخطة</th>
+                                    <th>المسئول</th>
+                                    <th>تاريخ العطل</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                               
+                                @foreach (var item in Model)
+                                    {
+                                         <tr>
+                                        <td>@item.CheckItem</td>
+                                        <td>@item.TypeName</td>
+                                        <td>@item.EquipmentName</td>
+                                        <td>@item.LocationName</td>
+                                        <td>@item.planName</td>
+                                        <td>@item.CreatedBy</td>
+                                        <td>@item.CreatedAt</td>
+                                    </tr>
+
+
+                                    <table id="tbl" style="width: 102%;padding: -14px;margin: 4px; " border="1">
+
+                                      <thead class="thead-style">
+                                    <tr>
+                                    <th>نوع قطع الغيار</th>
+                                    <th>قطع الغيار</th>
+                                    <th>العدد</th>
+                                    <th>تعديل العطل</th>
+                                     </tr>
+                                        </thead>
+                                        <tbody>
+                                            
+                                        @foreach (var item2 in item.CheckListMasterDetails)
+                                    {
+                                         <tr>
+                                        <td>@item2.SparePartTypeName</td>
+                                        <td>@item2.SparePartName</td>
+                                        <td>@item2.Quantity</td>
+                                        <td>@item2.CheckListMasterDetailID</td>
+                                        
+                                    </tr>
+                                    }
+                                        
+                                        
+                                        </tbody>
+                            
+                                </table>
+                                    }
+
+                               
+                            </tbody>
+                            
+                        </table>
+ *@
+
+                    </div>
+
+                </form>
+
+               
+              
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script src="~/jquery/3.7.0/Content/Scripts/jquery-3.7.0.min.js"></script>
+<script src="~/modules/checllist-module.js"></script>

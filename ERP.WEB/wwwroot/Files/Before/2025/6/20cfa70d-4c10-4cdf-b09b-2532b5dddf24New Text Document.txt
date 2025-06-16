@@ -1,0 +1,42 @@
+@{
+    var langCookies = Context.Request.Cookies.FirstOrDefault(c => c.Key == "Lang").Value;
+    var lang = string.IsNullOrEmpty(langCookies) ? "ar" : langCookies;
+}
+
+
+@(lang == "ar" ? "" : "")
+
+
+  public DataClasses1DataContext() :
+          base(global::System.Configuration.ConfigurationManager.ConnectionStrings["AgriculturalQuarantineDBConnectionString"].ConnectionString, mappingSource)
+  {
+      OnCreated();
+  }
+
+
+
+Quick_Ex_CheckRequestEdit c/v
+
+
+Ex_CheckRequestEdit  c/v
+
+Quick_Ex_CheckRequest c/v
+
+Ex_CheckRequest c/v
+
+ Quick_NewEx_plant   v
+
+Quick_NewEx_plantEdit  v
+
+NewEx_CheckRequestSaveController : ApiController
+
+NewEx_CheckRequestSaveEditeController : ApiController
+
+Ex_CheckRequestDetalis_ForUpdateController : ApiController
+
+Quick_NewEx_plantController : ApiController
+
+Quick_FillDropsFor_EXRequestController : ApiController
+
+
+[Select_ExportingCheckReqUpdateByID]

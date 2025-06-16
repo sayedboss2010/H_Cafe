@@ -1,0 +1,78 @@
+﻿@{
+    var langCookies = Context.Request.Cookies.FirstOrDefault(c => c.Key == "Lang").Value;
+    var lang = string.IsNullOrEmpty(langCookies) ? "ar" : langCookies;
+
+    ViewData["Title"] = lang == "ar" ? "الصفحة الرئيسية" : "Home Page";
+
+    var roleid = Context.Request.Cookies.FirstOrDefault(c => c.Key == "UserRule").Value;
+}
+
+<div class="row mt-2">
+    <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+        <div class="card-header my-5 shadow-blur cursor-pointer">
+            <div class=" p-2 d-flex align-items-center">
+                  <img src="~/assets/img/eco-packaging.png" class="store-img" />
+                <div class="text-end d-flex align-items-center justify-content-between w-100 pr-5 pl-5">
+                    <p class="font-weight-bold mb-0 text-capitalize" style="color:#000">إضافة مخازن </p>
+                    <span class="material-icons material-icons-outlined">
+                        keyboard_double_arrow_left
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+        <div class="card-header my-5 shadow-blur cursor-pointer">
+            <div class=" p-2 d-flex align-items-center">
+                <img src="~/assets/img/addpackage.png" class="store-img" />
+                <div class="text-end d-flex align-items-center justify-content-between w-100 pr-5 pl-5">
+                    <p class="font-weight-bold mb-0 text-capitalize" style="color:#000">ادخال الموارد </p>
+                    <span class="material-icons material-icons-outlined">
+                        keyboard_double_arrow_left
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+        <div class="card-header my-5 shadow-blur cursor-pointer">
+            <div class=" p-2 d-flex align-items-center">
+                <img src="~/assets/img/eco-packaging.png" class="store-img" />
+                <div class="text-end d-flex align-items-center justify-content-between w-100 pr-5 pl-5">
+                    <p class="font-weight-bold mb-0 text-capitalize" style="color:#000">إضافة مخازن </p>
+                    <span class="material-icons material-icons-outlined">
+                        keyboard_double_arrow_left
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@*<div class="card my-5 shadow-blur">
+    if (roleid == "6")
+    {
+        <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 border-radius-lg">
+            <div class="shadow-blur border-radius-lg p-4">
+                <div class="row align-items-center">
+                    <div class=" ps-3 col-lg-6 col-md-12 col-sm-12">
+                    </div>
+                    <div class="col-lg-6 col-md-12 col-sm-12 header-buttons">
+                        <a asp-action="ReadToExcel" class="btn btn-twitter">
+                            <i class="fa fa-book-reader"></i>
+                            &nbsp;&nbsp;@(lang == "ar" ? "قراءة البيانات" : "Read To Excel")
+                        </a>
+                        <a asp-action="WriteToDB" class="btn btn-slack" data-lang="@lang">
+                            <i class="fa fa-pen"></i>
+                            &nbsp;&nbsp; @(lang == "ar" ? "إدخال بيانات" : "Write To Database")
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    }
+    <div class="card-body">
+    </div>
+</div>*@

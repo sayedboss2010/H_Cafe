@@ -1,0 +1,7 @@
+to make a page :
+
+1- create vm class for entity object in ERP.VM project the properties must be the same name
+2- create repository class in ERP.Repository and make it implement the interface (the interface here for look ups only if we need to add anything else we will create another interface)
+3- create service class in ERP.Services and make it implement the interface (the interface here for look ups only if we need to add anything else we will create another interface)
+4- in ERP.IoC regidter the dependency injection of the repository and the service
+5- create controllers and views and user the service to get the data from the repository

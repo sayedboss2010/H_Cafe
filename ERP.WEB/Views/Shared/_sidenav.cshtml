@@ -1,0 +1,88 @@
+﻿@{
+    var langCookies = Context.Request.Cookies.FirstOrDefault(c => c.Key == "Lang").Value;
+    var lang = string.IsNullOrEmpty(langCookies) ? "ar" : langCookies;
+
+    //lang = "en";
+
+    var fixedClass = lang == "ar" ? "fixed-end" : "fixed-start";
+    var iconCLass = lang == "ar" ? "start-0" : "end-0";
+    var navbar = lang == "ar" ? "px-0" : "";
+    var rotate = lang == "ar" ? "rotate-caret" : "";
+
+    //rolesid => 1=HR 2=stocks
+    var roleid = Context.Request.Cookies.FirstOrDefault(c => c.Key == "UserRule").Value;
+
+    var title = lang == "ar" ? "منظومة الصيانة الوقائية" : "ERP System";
+    if (!string.IsNullOrEmpty(roleid))
+    {
+        if (roleid == "1")
+        {
+            title = lang == "ar" ? "المخازن" : "Stockes";
+        }
+  
+    }
+}
+
+<aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0  @fixedClass @rotate bg-gradient-dark"
+       id="sidenav-main">
+    <div class="sidbar-items">
+        <div class="sidenav-header" style="height: 150px !important;">
+            <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute @iconCLass top-0 d-none d-xl-none"
+               aria-hidden="true" id="iconSidenav"></i>
+            <a class="navbar-brand m-0 text-center" href="@Url.Action("Index", "Home", new {area = ""})">
+                <img src="~/logo/LogogWhite.png" class="navbar-brand-img h-100" alt="main_logo"
+                     style="max-height: 2.5rem; margin-bottom: 10px !important;">
+                <br />
+                <span class="ms-1 font-weight-bold text-white">@title</span>
+            </a>
+        </div>
+        <hr class="horizontal light mt-0 mb-2">
+        <div class="collapse navbar-collapse " id="sidenav-collapse-main">
+            <ul class="navbar-nav">
+                <li class="nav-item mt-3">
+                    <a class="nav-link text-white @Html.isActive("Index", "Home")" href="@Url.Action("Index", "Home", new {area = ""})">
+                        <div class="text-white text-center ms-2 d-flex align-items-center justify-content-center">
+                            <i class="material-icons opacity-10">home</i>
+                        </div>
+                        <span class="nav-link-text ms-1">@(lang == "ar" ? "الرئيسية" : "Home")</span>
+                    </a>
+                </li>
+                @if (roleid == "6" || roleid == "7")
+                {
+                    <li class="nav-item">
+                        <a data-bs-toggle="collapse" href="#apiExamples" aria-controls="apiExamples" aria-expanded="false"
+                           class="nav-link collapsed" type="button">
+                            <div class="text-white text-center ms-2 d-flex align-items-center justify-content-center">
+                                <i class="material-icons opacity-10">settings</i>
+                            </div>
+                            <span class="nav-link-text ms-1">@(lang == "ar" ? " الصيانة" : "System Lookups")</span>
+                        </a>
+                        <div id="apiExamples" class="collapse" style="">
+                            <ul class="nav">
+                                <li class="nav-item opacity-75">
+                                    <a class="nav-link text-white  @Html.isActive("Index", "Checllist")"
+                                       href="@Url.Action("Index", "Checllist", new { area = "" })">
+                                        <div class="text-white text-center ms-2 d-flex align-items-center justify-content-center">
+                                            <i class="material-icons opacity-10">apartment</i>&nbsp;
+                                        </div>
+                                        <span class="nav-link-text ms-1">@(lang == "ar" ? "عمل الصيانة" : "Checl list")</span>
+                                    </a>
+                                </li>
+                              @*   <li class="nav-item opacity-75">
+                                    <a class="nav-link text-white  @Html.isActive("Index", "Faculty")"
+                                       href="@Url.Action("Index", "Faculty", new { area = "" })">
+                                        <div class="text-white text-center ms-2 d-flex align-items-center justify-content-center">
+                                            <i class="material-icons opacity-10">location_city</i>&nbsp;
+                                        </div>
+                                        <span class="nav-link-text ms-1">@(lang == "ar" ? "الكليات" : "Faculties")</span>
+                                    </a>
+                                </li> *@
+                            </ul>
+                        </div>
+                    </li>
+                }
+              
+            </ul>
+        </div>
+    </div>
+</aside>

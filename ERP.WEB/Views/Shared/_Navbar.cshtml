@@ -1,0 +1,63 @@
+﻿@{
+    var langCookies = Context.Request.Cookies.FirstOrDefault(c => c.Key == "Lang").Value;
+    var lang = string.IsNullOrEmpty(langCookies) ? "ar" : langCookies;
+
+    //lang = "en";
+       
+    var collcass = lang == "ar" ? "px-0" : "me-md-0 me-sm-4";
+    var ulClass = lang == "ar" ? "me-auto ms-0" : "";
+    var dropClass = lang == "ar" ? "" : "dropdown-menu-end";
+    var iconNav = lang == "ar" ? "px-3" : "ps-3";
+
+    var userName = Context.Request.Cookies.FirstOrDefault(c => c.Key == "UserName").Value ?? "UserName";
+}
+
+<!-- Navbar -->
+<nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl blur shadow-blur mt-4" id="navbarBlur" 
+     navbar-scroll="false">
+    <div class="container-fluid py-1 px-3">
+        <nav aria-label="breadcrumb">
+            <h4 class="font-weight-bolder mb-0">@ViewData["Title"]</h4>
+        </nav>
+        <div class="collapse navbar-collapse mt-sm-0 mt-2 @collcass" id="navbar">
+            <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+                <div class="input-group input-group-outline">
+                    @*<label class="form-label">أكتب هنا...</label>
+                        <input type="text" class="form-control">*@
+                </div>
+            </div>
+            <ul class="navbar-nav @ulClass justify-content-end">
+                <li class="nav-item d-flex px-3 align-items-center">
+                    <a asp-controller="Home" asp-action="ChangeLang" asp-route-lang="@(lang=="ar"? "en" :"ar")"
+                       class="nav-link text-body p-0" title="@(lang=="ar"? "English" :"Arabic")">
+                        <i class="fa fa-globe me-sm-1"></i>
+                        @(lang == "ar" ? "English" : "Arabic")
+                    </a>
+                </li>
+                <li class="nav-item d-flex align-items-center">
+                    <a href="javascript:;" class="nav-link text-body font-weight-bold px-0">
+                        <i class="fa fa-user me-sm-1"></i>
+                        <span class="d-sm-inline d-none">@userName</span>
+                    </a>
+                </li>
+
+                <li class="nav-item d-flex px-3 align-items-center">
+                    <a asp-controller="Home" asp-action="Logout" asp-area="" class="nav-link text-body p-0"
+                       title="@(lang=="ar"? "تسجيل خروج" :"Logout")">
+                        <i class="fa fa-sign-out" aria-hidden="true"></i>
+                    </a>
+                </li>
+                <li class="nav-item d-xl-none px-3 d-flex align-items-center">
+                    <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
+                        <div class="sidenav-toggler-inner">
+                            <i class="sidenav-toggler-line"></i>
+                            <i class="sidenav-toggler-line"></i>
+                            <i class="sidenav-toggler-line"></i>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- End Navbar -->
