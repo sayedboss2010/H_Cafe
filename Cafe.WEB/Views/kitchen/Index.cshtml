@@ -1,0 +1,188 @@
+﻿@model List<Cafe.VM.ViewModels.kitchenVM>
+
+@{
+    var langCookies = Context.Request.Cookies.FirstOrDefault(c => c.Key == "Lang").Value;
+    var lang = string.IsNullOrEmpty(langCookies) ? "ar" : langCookies;
+    ViewData["Title"] = lang == "ar" ? "المطبخ" : "kitchen";
+}
+
+<style>
+    .order-card {
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        padding: 16px;
+        margin-bottom: 24px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        background-color: #fff;
+    }
+
+    .order-header {
+        background-color: #4a90e2;
+        color: #fff;
+        padding: 12px;
+        font-size: 20px;
+        font-weight: bold;
+        border-radius: 8px 8px 0 0;
+        text-align: center;
+    }
+
+    .order-section {
+        margin-top: 15px;
+    }
+
+    .order-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+        margin-bottom: 10px;
+    }
+
+    .order-col {
+        flex: 1;
+        min-width: 200px;
+        font-size: 16px;
+        color: #333;
+    }
+
+        .order-col strong {
+            color: #555;
+            display: inline-block;
+            margin-bottom: 3px;
+        }
+
+    table.order-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 15px;
+        font-size: 15px;
+        background-color: #fafafa;
+    }
+
+        table.order-table th,
+        table.order-table td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+
+        table.order-table thead {
+            background-color: #eaf4ff;
+            color: #333;
+        }
+
+    .table-button-row {
+        text-align: center;
+        padding-top: 15px;
+    }
+
+    .order-button {
+        padding: 10px 28px;
+        font-size: 15px;
+        background-color: #5cb85c;
+        border: none;
+        color: #fff;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+        .order-button:hover {
+            background-color: #449d44;
+        }
+
+    .no-data {
+        text-align: center;
+        padding: 30px;
+        font-size: 18px;
+        color: #999;
+        background-color: #f8f8f8;
+        border-radius: 8px;
+    }
+</style>
+
+
+  <form method="post" action="Edit">
+
+    @if (Model.Count > 0)
+    {
+        @foreach (var order in Model)
+        {
+            <form method="post">
+@*                 <input type="hidden" name="orderId" value="@order.OrderID" />
+ *@
+                <div class="order-card">
+                    <div class="order-header">
+                        @($"{(lang == "ar" ? "طلب رقم" : "Order No.")}: {order.OrderID}")
+                    </div>
+
+                    <div class="order-section">
+                        <div class="order-row">
+                            <div class="order-col">
+                                <strong>@(lang == "ar" ? "نوع الطلب" : "Order Type"):</strong>
+                                @((lang == "ar" ? order.OrderTypeNameAr : order.OrderTypeNameEn))
+                            </div>
+                            <div class="order-col">
+                                <strong>@(lang == "ar" ? "الطاولة" : "Table"):</strong>
+                                @order.TableID
+                            </div>
+                            <div class="order-col">
+                                <strong>@(lang == "ar" ? "الموقع" : "Location"):</strong>
+                                @((lang == "ar" ? order.LocationNameAr : order.LocationNameEn))
+                            </div>
+                        </div>
+
+                        <div class="order-row">
+                            <div class="order-col">
+                                <strong>@(lang == "ar" ? "التاريخ" : "Date"):</strong>
+                                @order.OrderDate
+                            </div>
+                           
+                        </div>
+
+                        <h5>@(lang == "ar" ? "تفاصيل الطلب" : "Order Details")</h5>
+
+                        <table class="order-table">
+                            <thead>
+                                <tr>
+                                    <th>@(lang == "ar" ? "الصنف" : "Item")</th>
+                                    <th>@(lang == "ar" ? "الكمية" : "Quantity")</th>
+                                    <th>@(lang == "ar" ? "مكتمل/غير مكتمل" : "Complete/Incomplete")</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in order.OrderDetails)
+                                {
+                                    <tr>
+                                        <td>@(lang == "ar" ? item.ItemNameAr : item.ItemNameEn)</td>
+                                        <td>@item.Quantity</td>
+                                        <td><input type="checkbox" name="selectedItems" value="@item.OrderDetailID" /></td>
+                                    </tr>
+                                }
+                                <tr>
+                                    <td colspan="3" class="table-button-row">
+                                        <button type="button" class="order-button" onclick="finishOrder(@order.OrderID, this)">
+                                            @(lang == "ar" ? "إنهاء الطلب" : "Finish Order")
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </form>
+        }
+    }
+    else
+    {
+        <div class="no-data">
+            @(lang == "ar" ? "لا يوجد بيانات" : "No data available")
+        </div>
+    }
+
+</form>
+<script src="~/jquery/3.7.0/content/scripts/jquery-3.7.0.min.js"></script>
+<script src="~/modules/kitchen-module.js"></script>
+
+
+
+

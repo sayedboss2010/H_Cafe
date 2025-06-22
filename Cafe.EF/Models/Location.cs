@@ -33,5 +33,5 @@ public partial class Location
 
     public virtual Entity Entity { get; set; }
 
-    public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
+    public virtual ICollection<Table> Tables { get; set; } = new List<Table>();
 }

@@ -11,10 +11,10 @@ using static Cafe.VM.ViewModels.MenuCafeCategoryVM;
 
 namespace Cafe.Services.MenuCafe
 {
-    public class MenuCafeServes
+    public class MenuCafeService
     {
         private readonly MenuCafeRepo _MenuCafeRepo;
-        public MenuCafeServes(MenuCafeRepo MenuCafeRepo)
+        public MenuCafeService(MenuCafeRepo MenuCafeRepo)
         {
             _MenuCafeRepo = MenuCafeRepo;
         }

@@ -33,6 +33,8 @@ public partial class Item
 
     public DateTime? DeletionTime { get; set; }
 
+    public string ItemPhotoPath { get; set; }
+
     public virtual ItemCategory Category { get; set; }
 
     public virtual Entity Entity { get; set; }

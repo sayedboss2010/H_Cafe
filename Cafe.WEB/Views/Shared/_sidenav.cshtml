@@ -55,7 +55,7 @@
                             <div class="text-white text-center ms-2 d-flex align-items-center justify-content-center">
                                 <i class="material-icons opacity-10">settings</i>
                             </div>
-                            <span class="nav-link-text ms-1">@(lang == "ar" ? " الصيانة" : "System Lookups")</span>
+                            <span class="nav-link-text ms-1">@(lang == "ar" ? " القائمة" : "System Lookups")</span>
                         </a>
                         <div id="apiExamples" class="collapse" style="">
                             <ul class="nav">
@@ -69,15 +69,15 @@
                                         <span class="nav-link-text ms-1">@(lang == "ar" ? "المنيو" : "Checl list")</span>
                                     </a>
                                 </li>
-                              @*   <li class="nav-item opacity-75">
-                                    <a class="nav-link text-white  @Html.isActive("Index", "Faculty")"
-                                       href="@Url.Action("Index", "Faculty", new { area = "" })">
+                                <li class="nav-item opacity-75">
+                                    <a class="nav-link text-white  @Html.isActive("Index", "kitchen")"
+                                       href="@Url.Action("Index", "kitchen", new { area = "" })">
                                         <div class="text-white text-center ms-2 d-flex align-items-center justify-content-center">
                                             <i class="material-icons opacity-10">location_city</i>&nbsp;
                                         </div>
-                                        <span class="nav-link-text ms-1">@(lang == "ar" ? "الكليات" : "Faculties")</span>
+                                        <span class="nav-link-text ms-1">@(lang == "ar" ? "المطبخ" : "kitchen")</span>
                                     </a>
-                                </li> *@
+                                </li>
                             </ul>
                         </div>
                     </li>

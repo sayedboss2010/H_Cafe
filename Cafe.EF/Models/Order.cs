@@ -9,7 +9,7 @@ public partial class Order
 
     public int? OrderTypeID { get; set; }
 
-    public int? LocationID { get; set; }
+    public int? TabelID { get; set; }
 
     public DateTime? OrderDate { get; set; }
 
@@ -31,11 +31,13 @@ public partial class Order
 
     public DateTime? DeletionTime { get; set; }
 
-    public virtual Location Location { get; set; }
+    public bool? ISDone { get; set; }
 
     public virtual ICollection<OrderDetail> OrderDetails { get; set; } = new List<OrderDetail>();
 
     public virtual OrderType OrderType { get; set; }
 
     public virtual ICollection<Payment> Payments { get; set; } = new List<Payment>();
+
+    public virtual Table Tabel { get; set; }
 }

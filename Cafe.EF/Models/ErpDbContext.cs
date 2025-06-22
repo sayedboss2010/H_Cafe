@@ -42,6 +42,8 @@ public partial class ErpDbContext : DbContext
 
     public virtual DbSet<PaymentType> PaymentTypes { get; set; }
 
+    public virtual DbSet<Table> Tables { get; set; }
+
     public virtual DbSet<User> Users { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -237,13 +239,13 @@ public partial class ErpDbContext : DbContext
                 .HasColumnType("datetime");
             entity.Property(e => e.UpdateTime).HasColumnType("datetime");
 
-            entity.HasOne(d => d.Location).WithMany(p => p.Orders)
-                .HasForeignKey(d => d.LocationID)
-                .HasConstraintName("FK__Orders__Location__60A75C0F");
-
             entity.HasOne(d => d.OrderType).WithMany(p => p.Orders)
                 .HasForeignKey(d => d.OrderTypeID)
                 .HasConstraintName("FK__Orders__OrderTyp__5FB337D6");
+
+            entity.HasOne(d => d.Tabel).WithMany(p => p.Orders)
+                .HasForeignKey(d => d.TabelID)
+                .HasConstraintName("FK_Orders_Tables");
         });
 
         modelBuilder.Entity<OrderDetail>(entity =>
@@ -334,6 +336,24 @@ public partial class ErpDbContext : DbContext
                 .HasMaxLength(100)
                 .IsUnicode(false);
             entity.Property(e => e.UpdateTime).HasColumnType("datetime");
+        });
+
+        modelBuilder.Entity<Table>(entity =>
+        {
+            entity.HasKey(e => e.TabelID);
+
+            entity.Property(e => e.CreationTime)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.DeletionTime).HasColumnType("datetime");
+            entity.Property(e => e.IsActive).HasDefaultValue(true);
+            entity.Property(e => e.IsDeleted).HasDefaultValue(false);
+            entity.Property(e => e.Notes).HasMaxLength(255);
+            entity.Property(e => e.UpdateTime).HasColumnType("datetime");
+
+            entity.HasOne(d => d.Location).WithMany(p => p.Tables)
+                .HasForeignKey(d => d.LocationID)
+                .HasConstraintName("FK_Tables_Locations");
         });
 
         modelBuilder.Entity<User>(entity =>

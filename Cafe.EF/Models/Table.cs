@@ -3,17 +3,13 @@ using System.Collections.Generic;
 
 namespace Cafe.EF.Models;
 
-public partial class ItemCategory
+public partial class Table
 {
-    public int CategoryID { get; set; }
+    public int TabelID { get; set; }
 
-    public string NameEn { get; set; }
+    public int? LocationID { get; set; }
 
-    public string NameAr { get; set; }
-
-    public string DescriptionEn { get; set; }
-
-    public string DescriptionAr { get; set; }
+    public string Notes { get; set; }
 
     public bool? IsActive { get; set; }
 
@@ -31,7 +27,9 @@ public partial class ItemCategory
 
     public DateTime? DeletionTime { get; set; }
 
-    public string ItemCategoryPhotoPath { get; set; }
+    public string QRCode { get; set; }
 
-    public virtual ICollection<Item> Items { get; set; } = new List<Item>();
+    public virtual Location Location { get; set; }
+
+    public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
 }
