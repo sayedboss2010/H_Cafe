@@ -1,4 +1,5 @@
-﻿using Cafe.Repository.Repositories.MenuCafe;
+﻿using Cafe.Repository.Repositories.Generic;
+using Cafe.Repository.Repositories.MenuCafe;
 using Cafe.VM.ViewModels;
 using System;
 using System.Collections;
@@ -6,22 +7,27 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static Cafe.VM.ViewModels.MenuCafeVM;
+using static Cafe.VM.ViewModels.MenuCafeCategoryVM;
 
 namespace Cafe.Services.MenuCafe
 {
     public class MenuCafeServes
     {
         private readonly MenuCafeRepo _MenuCafeRepo;
-        public IList<Category> List()
+        public MenuCafeServes(MenuCafeRepo MenuCafeRepo)
+        {
+            _MenuCafeRepo = MenuCafeRepo;
+        }
+        public IList<MenuCafeCategoryVM> List()
         {
             try
             {
-                return _MenuCafeRepo.list();
+                var list = _MenuCafeRepo.list();
+                return list;
             }
             catch (Exception)
             {
-                return new List<Category>();
+                return new List<MenuCafeCategoryVM>();
             }
         }
     }

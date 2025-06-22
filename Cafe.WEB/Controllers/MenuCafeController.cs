@@ -32,18 +32,14 @@ namespace Cafe.WEB.Controllers
 
         public IActionResult Index()
         {
-
             //return View(MenuItems);
             return View();
         }
 
         public IActionResult IndexNew()
         {
-
             var lst = MenuCafeServes.List();
-
             return View(lst);
-
         }
 
         //public IActionResult AddToCart(int id)

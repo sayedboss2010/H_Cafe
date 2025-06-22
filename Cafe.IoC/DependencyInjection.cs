@@ -1,6 +1,8 @@
 ﻿
 using Cafe.Repository.Repositories.Menu;
+using Cafe.Repository.Repositories.MenuCafe;
 using Cafe.Services.Menu;
+using Cafe.Services.MenuCafe;
 using Cafe.VM.ViewModels;
 
 namespace Cafe.IoC;
@@ -23,7 +25,10 @@ public static class DependencyInjection
 
         services.AddScoped<IMenuRepo, MenuRepo>();
         services.AddScoped<IMenuService, MenuService>();
-        
+
+        services.AddScoped<MenuCafeRepo, MenuCafeRepo>();
+        services.AddScoped<MenuCafeServes, MenuCafeServes>();
+
 
 
         //Auto Mapper Configurations

@@ -7,24 +7,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static Cafe.VM.ViewModels.MenuCafeVM;
+using static Cafe.VM.ViewModels.MenuCafeCategoryVM;
 
 namespace Cafe.Repository.Repositories.MenuCafe
 {
     public class MenuCafeRepo
     {
-        private readonly IMapper _mapper;
+        //private readonly IMapper _mapper;
 
-        public MenuCafeRepo(IMapper mapper)
-        {
-            _mapper = mapper;
-        }
+        //public MenuCafeRepo(IMapper mapper)
+        //{
+        //    _mapper = mapper;
+        //}
 
-        public IList<Category> list()
+        public IList<MenuCafeCategoryVM> list()
         {
             using var dbContext = new ErpDbContext();
             var categories = (from c in dbContext.ItemCategories
-                              select new Category
+                              select new MenuCafeCategoryVM
                               {
                                   Id = c.CategoryID,
                                   Name = c.NameAr,
@@ -37,7 +37,7 @@ namespace Cafe.Repository.Repositories.MenuCafe
                                                        Price = i.Price,
                                                    }).ToList()
                               }).ToList();
-            return _mapper.Map<List<Category>>(categories);
+            return categories;
         }
     }
 }
