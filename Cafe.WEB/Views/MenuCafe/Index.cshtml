@@ -1,0 +1,160 @@
+﻿@{
+    ViewData["Title"] = "طلب من الكافتيريا";
+}
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+        background: radial-gradient(circle, #fbd56d, #fca518);
+        margin: 0;
+        padding: 0;
+        direction: rtl;
+        text-align: center;
+    }
+
+    h1 {
+        font-size: 2em;
+        color: #444;
+        margin: 20px;
+    }
+
+    .menu-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 20px;
+        padding: 20px;
+    }
+
+    .menu-section {
+        background-color: #fff;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        text-align: center;
+        position: relative;
+    }
+
+    .menu-section img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 10px;
+    }
+
+    .price {
+        background-color: #ffd54f;
+        color: #a00;
+        font-weight: bold;
+        display: inline-block;
+        padding: 5px 15px;
+        border-radius: 25px;
+        position: absolute;
+        top: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .item-name {
+        margin-top: 10px;
+        font-size: 1.2em;
+        color: #333;
+    }
+
+    .quantity-control {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 10px;
+    }
+
+    .quantity-control button {
+        background-color: #28a745;
+        color: white;
+        border: none;
+        padding: 8px 12px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+    .quantity-control button:disabled {
+        background-color: #ccc;
+        cursor: not-allowed;
+    }
+
+    .quantity-control span {
+        font-size: 1.2em;
+        margin: 0 10px;
+    }
+
+    .footer {
+        background-color: #f44336;
+        color: white;
+        padding: 15px;
+        font-size: 18px;
+        margin-top: 30px;
+    }
+</style>
+
+<h1>قائمة طعام</h1>
+
+<div class="menu-container">
+    <!-- صنف 1 -->
+    <div class="menu-section">
+        <div class="price">١٣٦ ج.م</div>
+        <img src="https://i.imgur.com/9O1eHFn.jpg" alt="تشكن وينجز" />
+        <h2 class="item-name">تشكن وينجز</h2>
+        <div class="quantity-control">
+            <button onclick="decreaseQuantity(1)">➖</button>
+            <span id="quantity-1">1</span>
+            <button onclick="increaseQuantity(1)">➕</button>
+        </div>
+    </div>
+
+    <!-- صنف 2 -->
+    <div class="menu-section">
+        <div class="price">١٣٦ ج.م</div>
+        <img src="https://i.imgur.com/EqC1EOf.jpg" alt="قطع دجاج مقلي" />
+        <h2 class="item-name">قطع دجاج مقلي</h2>
+        <div class="quantity-control">
+            <button onclick="decreaseQuantity(2)">➖</button>
+            <span id="quantity-2">1</span>
+            <button onclick="increaseQuantity(2)">➕</button>
+        </div>
+    </div>
+
+    <!-- صنف 3 -->
+    <div class="menu-section">
+        <div class="price">وسط: ١٣٦ ج.م | لارج: ٢٤٨ ج.م</div>
+        <img src="https://i.imgur.com/LlzThns.jpg" alt="بيتزا" />
+        <h2 class="item-name">بيتزا</h2>
+        <div class="quantity-control">
+            <button onclick="decreaseQuantity(3)">➖</button>
+            <span id="quantity-3">1</span>
+            <button onclick="increaseQuantity(3)">➕</button>
+        </div>
+    </div>
+</div>
+
+<div class="footer">
+    <p>جميع الحقوق محفوظة © 2025</p>
+</div>
+
+<script>
+    // وظيفة لزيادة الكمية
+    function increaseQuantity(itemId) {
+        let quantityElement = document.getElementById('quantity-' + itemId);
+        let currentQuantity = parseInt(quantityElement.textContent);
+        quantityElement.textContent = currentQuantity + 1;
+    }
+
+    // وظيفة لتقليل الكمية
+    function decreaseQuantity(itemId) {
+        let quantityElement = document.getElementById('quantity-' + itemId);
+        let currentQuantity = parseInt(quantityElement.textContent);
+        if (currentQuantity > 1) {
+            quantityElement.textContent = currentQuantity - 1;
+        }
+    }
+</script>
+

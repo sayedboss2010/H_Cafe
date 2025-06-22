@@ -1,0 +1,35 @@
+﻿@model List<Cafe.WEB.Models.CartItem>
+
+@{
+    ViewData["Title"] = "سلة الطلب";
+    decimal total = Model.Sum(item => item.Price * item.Quantity);
+}
+
+<h1>سلة الطلب</h1>
+
+@if (Model.Count == 0)
+{
+    <p>السلة فارغة.</p>
+}
+else
+{
+    <table class="table">
+        <tr>
+            <th>الصنف</th>
+            <th>الكمية</th>
+            <th>السعر</th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>@item.Quantity</td>
+                <td>@(item.Price * item.Quantity)</td>
+            </tr>
+        }
+    </table>
+
+    <p><strong>الإجمالي:</strong> @total جنيه</p>
+
+    <a href="/Cart/Checkout" class="btn btn-success">الدفع الآن</a>
+}

@@ -72,7 +72,7 @@ namespace Cafe.WEB.Controllers
                 Response.Cookies.Append("AuthKey", data.AuthKey, option);
                 Response.Cookies.Append("Lang", "ar", option);
 
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("IndexQRCode", "Cart");
             }
 
             return RedirectToAction("Login", new { errorid = 99 });

@@ -18,7 +18,10 @@ builder.Services.AddSession();
 builder.Services.AddPersistence(builder.Configuration);
 
 var app = builder.Build();
+//sayed 
 
+builder.Services.AddSession();
+app.UseSession();
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {

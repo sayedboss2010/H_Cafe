@@ -12,7 +12,7 @@
     //rolesid => 1=HR 2=stocks
     var roleid = Context.Request.Cookies.FirstOrDefault(c => c.Key == "UserRule").Value;
 
-    var title = lang == "ar" ? "منظومة الصيانة الوقائية" : "ERP System";
+    var title = lang == "ar" ? "منظومة إدارة الكافتريا" : "ERP System";
     if (!string.IsNullOrEmpty(roleid))
     {
         if (roleid == "1")
@@ -60,12 +60,13 @@
                         <div id="apiExamples" class="collapse" style="">
                             <ul class="nav">
                                 <li class="nav-item opacity-75">
-                                    <a class="nav-link text-white  @Html.isActive("Index", "Checllist")"
-                                       href="@Url.Action("Index", "Checllist", new { area = "" })">
+
+                                    <a class="nav-link text-white  @Html.isActive("IndexQRCode", "Cart")"
+                                       href="@Url.Action("IndexQRCode", "Cart", new { area = "" })">
                                         <div class="text-white text-center ms-2 d-flex align-items-center justify-content-center">
                                             <i class="material-icons opacity-10">apartment</i>&nbsp;
                                         </div>
-                                        <span class="nav-link-text ms-1">@(lang == "ar" ? "عمل الصيانة" : "Checl list")</span>
+                                        <span class="nav-link-text ms-1">@(lang == "ar" ? "المنيو" : "Checl list")</span>
                                     </a>
                                 </li>
                               @*   <li class="nav-item opacity-75">

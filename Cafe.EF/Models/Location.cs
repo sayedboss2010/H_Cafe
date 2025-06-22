@@ -29,6 +29,8 @@ public partial class Location
 
     public DateTime? DeletionTime { get; set; }
 
+    public string QRCode { get; set; }
+
     public virtual Entity Entity { get; set; }
 
     public virtual ICollection<Order> Orders { get; set; } = new List<Order>();

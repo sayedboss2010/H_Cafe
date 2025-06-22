@@ -1,14 +1,5 @@
 
 
-Scaffold-DbContext "Server=.;Database=ERP;Trusted_Connection=True;TrustServerCertificate=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models -ContextDir "Data"  -Context "ErpDbContext" -force
-
-Scaffold-DbContext "Server=.;Database=PreventiveMaintenanceDB;Trusted_Connection=True;TrustServerCertificate=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models -ContextDir "Data"  -Context "ErpDbContext" -force
-
-
-
-Scaffold-DbContext "Server=DESKTOP-THL8D05;Database=db21725;Trusted_Connection=True;TrustServerCertificate=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models -Context ErpDbContext  -UseDatabaseNames -Force
-
-    public virtual DbSet<DataToExcel> DataToExcels { get; set; }
   
   Scaffold-DbContext "Server=db21725.public.databaseasp.net;Database=db21725;User Id=db21725;Password=2Kj+%t7BbG?9;TrustServerCertificate=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models -Context ErpDbContext -UseDatabaseNames -Force
 
