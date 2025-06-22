@@ -27,7 +27,7 @@ public static class DependencyInjection
         services.AddScoped<IMenuService, MenuService>();
 
         services.AddScoped<MenuCafeRepo, MenuCafeRepo>();
-        services.AddScoped<MenuCafeServes, MenuCafeServes>();
+        services.AddScoped<MenuCafeService, MenuCafeService>();
 
 
 

@@ -11,9 +11,9 @@ namespace Cafe.WEB.Controllers
 {
     public class MenuCafeController : Controller
     {
-        private readonly MenuCafeServes MenuCafeServes;
+        private readonly MenuCafeService MenuCafeServes;
 
-        public MenuCafeController(MenuCafeServes _MenuCafeServes)
+        public MenuCafeController(MenuCafeService _MenuCafeServes)
         {
            
             MenuCafeServes = _MenuCafeServes;

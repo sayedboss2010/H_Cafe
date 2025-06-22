@@ -22,7 +22,7 @@ namespace Cafe.WEB.Controllers
                 return Json(new
                 {
                     status = "success",
-                    redirectUrl = Url.Action("Index", "MenuCafe"),
+                    redirectUrl = Url.Action("Indexnew", "MenuCafe"),
                     data = request.QrData
                 });
                 //return Json(new { status = "success", data = request.QrData });
