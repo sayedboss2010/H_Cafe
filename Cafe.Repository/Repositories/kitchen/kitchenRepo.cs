@@ -13,6 +13,7 @@ namespace Cafe.Repository.Repositories.kitchen
 {
     public class kitchenRepo : IGenericRepo<kitchenVM>
     {
+
         public bool ActivateEntity(long id, bool isActive, int userId)
         {
             throw new NotImplementedException();

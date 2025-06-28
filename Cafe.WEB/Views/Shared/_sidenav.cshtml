@@ -1,4 +1,5 @@
 ﻿@{
+
     var langCookies = Context.Request.Cookies.FirstOrDefault(c => c.Key == "Lang").Value;
     var lang = string.IsNullOrEmpty(langCookies) ? "ar" : langCookies;
 

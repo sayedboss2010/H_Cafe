@@ -9,6 +9,7 @@ namespace Cafe.WEB.Controllers
 {
     public class kitchenController : Controller
     {
+
         private readonly IGenericService<kitchenVM> order;
 
         public kitchenController(IGenericService<kitchenVM> _order)
