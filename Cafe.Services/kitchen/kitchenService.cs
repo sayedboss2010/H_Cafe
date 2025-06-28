@@ -14,7 +14,6 @@ namespace Cafe.Services.kitchen
 {
     public class kitchenService :IGenericService<kitchenVM>
     {
-
         private readonly IGenericRepo<kitchenVM> _order;
         public kitchenService(IGenericRepo<kitchenVM> order)
         {

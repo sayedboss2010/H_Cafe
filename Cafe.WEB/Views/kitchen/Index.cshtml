@@ -1,7 +1,6 @@
 ﻿@model List<Cafe.VM.ViewModels.kitchenVM>
 
 @{
-
     var langCookies = Context.Request.Cookies.FirstOrDefault(c => c.Key == "Lang").Value;
     var lang = string.IsNullOrEmpty(langCookies) ? "ar" : langCookies;
     ViewData["Title"] = lang == "ar" ? "المطبخ" : "kitchen";

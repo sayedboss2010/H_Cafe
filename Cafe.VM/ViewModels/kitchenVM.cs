@@ -8,7 +8,6 @@ namespace Cafe.VM.ViewModels
 {
     public class kitchenVM
     {
-
         public int OrderID { get; set; }
 
         public int? OrderTypeID { get; set; }

@@ -16,6 +16,7 @@ public static class DependencyInjection
     {
 
 
+
         services.AddDbContext<ErpDbContext>(options =>
             options.UseSqlServer(configuration.GetConnectionString("DBConnection")));
 

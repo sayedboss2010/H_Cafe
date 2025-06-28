@@ -3,7 +3,6 @@
 
 function finishOrder(orderId, button) {
 
-
     if (!confirm("هل أنت متأكد من إنهاء هذا الطلب؟")) return;
 
     $.ajax({
