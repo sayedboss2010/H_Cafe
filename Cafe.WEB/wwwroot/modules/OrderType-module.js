@@ -10,11 +10,11 @@ $(document).on('click', '.btnRefresh', function (e) {
 });
 
 $(document).on('click', '.btnModalClose', function () {
-    $("#addEmployeeModal").modal("hide");
+    $("#addOrderTypeModal").modal("hide");
 });
 
 $(document).on('click', '.btnAdd', function (e) {
-
+    
     e.preventDefault();
 
     lang = $(this).data('lang');
@@ -25,15 +25,11 @@ $(document).on('click', '.btnAdd', function (e) {
     $('#txtEnName').val('');
     $('.divEnName').removeClass('is-filled');
 
-    $('#txtphoneNumber').val('');
-    $('.divPhoneNumber').removeClass('is-filled');
-
-    
     //$('.drpSelectFac').val(null).trigger('change');
 
     $('#modalTitle').html(lang == "ar" ? "إضافة" : "Add");
-    $('#Employeeid').val(0);
-    $("#addEmployeeModal").appendTo('body').modal("show");
+    $('#ordertypeid').val(0);
+    $("#addOrderTypeModal").appendTo('body').modal("show");
 });
 
 $(document).on('click', '.edit-btn', function (e) {
@@ -42,27 +38,24 @@ $(document).on('click', '.edit-btn', function (e) {
     let id = $(this).data('id');
     lang = $(this).data('lang');
 
-    $('#Employeeid').val(id);
+    $('#ordertypeid').val(id);
 
     $.ajax({
-        url: '/Employee/GetById?id=' + id,
+        url: '/OrderType/GetById?id=' + id,
         async: true,
         success: function (result) {
             debugger;
             if (result != null && result.nameAr != "") {
-                $('#txtNameAr').val(result.nameAr);
+                $('#txtArName').val(result.nameAr);
                 $('.divArName').addClass('is-filled');
 
-                $('#txtNameEn').val(result.nameEn);
-                $('.divNameEn').addClass('is-filled');
-                $('#txtphoneNumber').val(result.phone);
-                $('.divPhoneNumber').addClass('is-filled');
-                $('#mainDrpEmployeeType').val(result.employeeTypeID);
+                $('#txtEnName').val(result.nameEn);
+                $('.divEnName').addClass('is-filled');
 
-
+                
                 $('#modalTitle').html(lang == "ar" ? "تعديل" : "Edit");
-
-                $("#addEmployeeModal").appendTo('body').modal("show");
+                
+                $("#addOrderTypeModal").appendTo('body').modal("show");
             }
         },
         error: function (xhr) {
@@ -78,61 +71,49 @@ $(document).on('click', '.edit-btn', function (e) {
 });
 
 $
-    (document).on('click', '#btnAddEditEmployee', function (e) {
-        e.preventDefault();
-       
-        let id = $('#Employeeid').val();
+    (document).on('click', '#btnAddEditOrderType', function (e) {
+    e.preventDefault();
+    debugger;
+        let id = $('#ordertypeid').val();
         let nameAr = $('#txtNameAr').val();
         let nameEn = $('#txtNameEn').val();
-        let Phone = $('#txtphoneNumber').val();
-        let EmployeeTypeID = $('#mainDrpEmployeeType').val();
+//    let facs = $('.drpSelectFac').val();
+
+    //if (facs == undefined) facs = "";
 
         if (nameAr == "" || nameEn == "") {
-            $('.alertEmpty').css("display", "block");
-            return;
-        }
+        $('.alertEmpty').css("display", "block");
+        return;
+    }
 
-        $('.alertEmpty').css("display", "none");
+    $('.alertEmpty').css("display", "none");
 
-        let uri = id == 0 ? '/Employee/Add?nameAr=' + nameAr + '&nameEn=' + nameEn + '&Phone=' + Phone + '&EmployeeTypeID=' + EmployeeTypeID
-            : '/Employee/Edit?id=' + id + '&nameAr=' + nameAr + '&nameEn=' + nameEn + '&Phone=' + Phone + '&EmployeeTypeID=' + EmployeeTypeID
+        let uri = id == 0 ? '/OrderType/Add?nameAr=' + nameAr + '&nameEn=' + nameEn 
+            : '/OrderType/Edit?id=' + id + '&nameAr=' + nameAr + '&nameEn=' + nameEn 
 
-        $.ajax({
-            url: uri,
-            async: true,
-            success: function (result) {
-               
-                if (result > 0) {
-                    jQuery.gritter.add({
-                        position: lang == "ar" ? 'top-left' : 'top-right',
-                        text: lang == "ar" ? "تم الحفظ بنجاح" : "Saved Successfully",
-                        class_name: 'growl-success',
-                        sticky: false,
-                        time: '1500'
-                    });
+    $.ajax({
+        url: uri,
+        async: true,
+        success: function (result) {
+            if (result > 0) {
+                jQuery.gritter.add({
+                    position: lang == "ar" ? 'top-left' : 'top-right',
+                    text: lang == "ar" ? "تم الحفظ بنجاح" : "Saved Successfully",
+                    class_name: 'growl-success',
+                    sticky: false,
+                    time: '1500'
+                });
 
-                    LoadIndex();
-                } else if (result == -1) {
-                    jQuery.gritter.add({
-                        position: lang == "ar" ? 'top-left' : 'top-right',
-                        text: lang == "ar" ? "الاسم موجود مسبقا" : "Name Exist",
-                        class_name: 'growl-warning',
-                        sticky: false,
-                        time: '1500',
-                    });
-                } else {
-                    jQuery.gritter.add({
-                        position: lang == "ar" ? 'top-left' : 'top-right',
-                        text: lang == "ar" ? "حدث خطأ من فضلك حاول مرة أخرى" : "Error happend please try again later",
-                        class_name: 'growl-warning',
-                        sticky: false,
-                        time: '1500',
-                    });
-                }
-
-                $("#addEmployeeModal").modal("hide");
-            },
-            error: function (xhr) {
+                LoadIndex();
+            } else if (result == -1) {
+                jQuery.gritter.add({
+                    position: lang == "ar" ? 'top-left' : 'top-right',
+                    text: lang == "ar" ? "الاسم موجود مسبقا" : "Name Exist",
+                    class_name: 'growl-warning',
+                    sticky: false,
+                    time: '1500',
+                });
+            } else {
                 jQuery.gritter.add({
                     position: lang == "ar" ? 'top-left' : 'top-right',
                     text: lang == "ar" ? "حدث خطأ من فضلك حاول مرة أخرى" : "Error happend please try again later",
@@ -141,8 +122,20 @@ $
                     time: '1500',
                 });
             }
-        });
+
+            $("#addOrderTypeModal").modal("hide");
+        },
+        error: function (xhr) {
+            jQuery.gritter.add({
+                position: lang == "ar" ? 'top-left' : 'top-right',
+                text: lang == "ar" ? "حدث خطأ من فضلك حاول مرة أخرى" : "Error happend please try again later",
+                class_name: 'growl-warning',
+                sticky: false,
+                time: '1500',
+            });
+        }
     });
+});
 
 $(document).on('click', '.btnDelete', function (e) {
     e.preventDefault();
@@ -155,7 +148,7 @@ $(document).on('click', '.btnDelete', function (e) {
         callback: function (result) {
             if (result) {
                 $.ajax({
-                    url: '/Employee/Delete?id=' + id,
+                    url: '/OrderType/Delete?id=' + id,
                     async: true,
                     success: function (result) {
                         debugger;
@@ -197,7 +190,7 @@ $(document).on('click', '.btnPrint', function () {
     let term = $('#SearchString').val();
 
     $.ajax({
-        url: '/Employee/PrintData?term=' + term,
+        url: '/OrderType/PrintData?term=' + term,
         async: true,
         success: function (result) {
 
@@ -251,11 +244,11 @@ $(document).on('click', '#searchBTN', function (e) {
 
 //***********************************************************************/
 function LoadIndex() {
-    let uri = '/Employee/Index';
+    let uri = '/OrderType/Index';
 
     let term = $('#SearchString').val();
     if (term != "") {
-        uri = '/Employee/Search?term=' + term;
+        uri = '/OrderType/Search?term=' + term;
     }
 
     $.ajax({

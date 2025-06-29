@@ -1,0 +1,64 @@
+﻿@model List<Cafe.VM.ViewModels.OrderTypeVm>
+
+@{
+    var lang = Context.Request.Cookies["Lang"] ?? "ar";
+}
+
+<table class="table align-items-center mb-0 text-center">
+    <thead>
+        <tr>
+            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                @(lang == "ar" ? "الاسم بالعربي" : "Name (AR)")
+            </th>
+            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                @(lang == "ar" ? "الاسم بالإنجليزي" : "Name (EN)")
+            </th>
+            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                @(lang == "ar" ? "الحالة" : "Status")
+            </th>
+            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                @(lang == "ar" ? "الخيارات" : "Actions")
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Any())
+        {
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.NameAr</td>
+                    <td>@item.NameEn</td>
+                    <td>
+                        <span class="badge @(item.IsActive == true ? "bg-success" : "bg-danger")">
+                            @(item.IsActive == true ? (lang == "ar" ? "مفعل" : "Active") : (lang == "ar" ? "غير مفعل" : "Inactive"))
+                        </span>
+                    </td>
+                    <td>
+                        <a href="javascript:;" class="btn btn-warning btn-sm edit-btn"
+                           data-id="@item.OrderTypeID" data-lang="@lang">
+                            <i class="fa fa-edit"></i>
+                        </a>
+                        <a href="javascript:;" class="btn btn-danger btn-sm btnDelete"
+                           data-id="@item.OrderTypeID">
+                            <i class="fa fa-trash"></i>
+                        </a>
+                        <a href="javascript:;" class="btn btn-info btn-sm btnActive"
+                           data-id="@item.OrderTypeID"
+                           data-active="@(item.IsActive == true ? 0 : 1)">
+                            <i class="fa @(item.IsActive == true ? "fa-toggle-on" : "fa-toggle-off")"></i>
+                        </a>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="4" class="text-center text-danger">
+                    @(lang == "ar" ? "لا توجد بيانات" : "No data available")
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

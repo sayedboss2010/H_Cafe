@@ -1,0 +1,101 @@
+﻿@model List<Cafe.VM.ViewModels.EmployeeTypeVm>
+
+@{
+    var langCookies = Context.Request.Cookies.FirstOrDefault(c => c.Key == "Lang").Value;
+    var lang = string.IsNullOrEmpty(langCookies) ? "ar" : langCookies;
+
+    ViewData["Title"] = lang == "ar" ? "أنواع الموظيفين" : "Employee Types";
+}
+
+<div class="card my-5 shadow-blur">
+    <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 border-radius-lg">
+        <div class="shadow-blur border-radius-lg p-4">
+            <div class="row align-items-center">
+                <div class=" ps-3 col-lg-6 col-md-12 col-sm-12">
+                    <form class="text-start" style="display:flex;">
+                        <div class="input-group input-group-outline my-3 w-100 searchDiv position-relative">
+                            <label class="form-label">@(lang == "ar" ? "بحث بالاسم" : "Search with name")</label>
+                            <input type="text" class="form-control" id="SearchString" />
+                            <a href="javascript:;" id="searchBTN" class="btn btn-search ">
+                                <i class="fa fa-search"></i>
+                            </a>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-lg-6 col-md-12 col-sm-12 header-buttons">
+                    @if (Model.Any())
+                    {
+                        <a href="javascript:;" class="btn btn-dribbble btnPrint">
+                            <i class="fa fa-print"></i>&nbsp;&nbsp;@(lang == "ar" ? "طباعة" : "Print")
+                        </a>
+                        <a asp-action="ExportToExcel" asp-route-term="@ViewBag.Search" class="btn btn-success">
+                            <i class="fa fa-download"></i>&nbsp;&nbsp;@(lang == "ar" ? "ملف الأكسل" : "Excel File")
+                        </a>
+                    }
+                    <a href="javascript:;" class="btn btn-twitter btnAdd" data-lang="@lang">
+                        <i class="fa fa-plus"></i>&nbsp;&nbsp;@(lang == "ar" ? "إضافة" : "Add")
+                    </a>
+                    <a href="javascript:;" class="btn btn-slack btnRefresh" data-lang="@lang">
+                        <i class="fa fa-refresh"></i>&nbsp;&nbsp;@(lang == "ar" ? "تحديث" : "Refresh")
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-body pt-5">
+        <div id="divdata">
+            <partial name="_PartialAllEmployeeType" for="@Model" />
+        </div>
+    </div>
+</div>
+
+<div id="addEmployeeTypeModal" class="modal fade" role="dialog">
+    <div class="modal-dialog custom-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title text-center">
+                    <span id="modalTitle"></span>
+                </h4>
+            </div>
+            <div class="modal-body">
+                <input hidden id="EmployeeTypeId" />
+                <form class="text-start">
+                    <div class="input-group input-group-outline my-3 w-100 divNameAr">
+                        <label class="form-label">@(lang == "ar" ? "الاسم بالعربي" : "Name (AR)")</label>
+                        <input type="text" class="form-control" id="txtNameAr" />
+                    </div>
+                    <div class="input-group input-group-outline my-3 w-100 divNameEn">
+                        <label class="form-label">@(lang == "ar" ? "الاسم بالإنجليزي" : "Name (EN)")</label>
+                        <input type="text" class="form-control" id="txtNameEn" />
+                    </div>
+                    <br />
+                    <div class="text-center">
+                        <span class="label label-danger alertEmpty" style="color:red;display:none;">
+                            @(lang == "ar" ? "يجب إدخال الاسم" : "Name is required")
+                        </span>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btnModalClose">@(lang == "ar" ? "إغلاق" : "Close")</button>
+                <button type="button" id="btnAddEditEmployeeType" class="btn btn-success">@(lang == "ar" ? "حفظ" : "Save")</button>
+            </div>
+        </div>
+    </div>
+</div>
+<input type="hidden" id="EmployeeTypeid" value="0" />
+<script src="~/jquery/3.7.0/content/scripts/jquery-3.7.0.min.js"></script>
+<script src="~/modules/employeetype-module.js"></script>
+
+@section Scripts {
+
+     <script>
+        $(document).ready(function () {
+            let term = '@ViewBag.Search';
+            if (term && term.trim() !== "") {
+                $('#SearchString').val(term);
+            }
+        });
+    </script>
+}

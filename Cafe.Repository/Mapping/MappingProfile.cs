@@ -12,6 +12,9 @@ public class MappingProfile : Profile
     {
         // Add as many of these lines as you need to map your objects
         CreateMap<PR_User, PrUserVm>().ReverseMap();
+        CreateMap<OrderType, OrderTypeVm>().ReverseMap();
+        CreateMap<EmployeeType, EmployeeTypeVm>().ReverseMap();
+        CreateMap<Employee, EmployeeCafeVm>().ReverseMap();
 
 
 
