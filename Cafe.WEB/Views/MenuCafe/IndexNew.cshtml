@@ -2,140 +2,141 @@
 
 @{
     ViewData["Title"] = "طلب من الكافتيريا";
+    int index = 0;
 }
 <style>
     body {
-    font-family: Tahoma, sans-serif;
-    direction: rtl;
-    background-color: #fff8f0;
-    color: #333;
-    padding: 20px;
-    margin: 0;
+        font-family: Tahoma, sans-serif;
+        direction: rtl;
+        background-color: #fff8f0;
+        color: #333;
+        padding: 20px;
+        margin: 0;
     }
 
     h1 {
-    text-align: center;
-    color: #d35400;
+        text-align: center;
+        color: #d35400;
     }
 
     .category-header {
-    display: flex;
-    align-items: center;
-    background-color: #fbeedb;
-    padding: 10px 15px;
-    border-radius: 10px;
-    margin-top: 20px;
-    cursor: pointer;
-    transition: background-color 0.3s;
+        display: flex;
+        align-items: center;
+        background-color: #fbeedb;
+        padding: 10px 15px;
+        border-radius: 10px;
+        margin-top: 20px;
+        cursor: pointer;
+        transition: background-color 0.3s;
     }
 
-    .category-header:hover {
-    background-color: #f5d8b0;
-    }
+        .category-header:hover {
+            background-color: #f5d8b0;
+        }
 
-    .category-header img {
-    width: 32px;
-    height: 32px;
-    margin-left: 10px;
-    }
+        .category-header img {
+            width: 32px;
+            height: 32px;
+            margin-left: 10px;
+        }
 
-    .category-header span {
-    font-size: 20px;
-    font-weight: bold;
-    color: #d35400;
-    }
+        .category-header span {
+            font-size: 20px;
+            font-weight: bold;
+            color: #d35400;
+        }
 
     .category-items {
-    display: none;
-    margin-bottom: 20px;
+        display: none;
+        margin-bottom: 20px;
     }
 
     .item {
-    display: flex;
-    align-items: center;
-    background-color: #fff;
-    padding: 10px;
-    border-radius: 10px;
-    margin-bottom: 10px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        display: flex;
+        align-items: center;
+        background-color: #fff;
+        padding: 10px;
+        border-radius: 10px;
+        margin-bottom: 10px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
     }
 
-    .item img {
-    width: 100px;
-    height: 100px;
-    border-radius: 8px;
-    object-fit: cover;
-    margin-right: 15px;
-    }
+        .item img {
+            width: 100px;
+            height: 100px;
+            border-radius: 8px;
+            object-fit: cover;
+            margin-right: 15px;
+        }
 
     .item-info {
-    flex: 1;
+        flex: 1;
     }
 
     .item-name {
-    font-size: 16px;
-    font-weight: bold;
+        font-size: 16px;
+        font-weight: bold;
     }
 
     .item-price {
-    color: #d35400;
-    margin-top: 5px;
+        color: #d35400;
+        margin-top: 5px;
     }
 
     .quantity-control {
-    display: flex;
-    align-items: center;
-    margin-left: 20px;
+        display: flex;
+        align-items: center;
+        margin-left: 20px;
     }
 
-    .quantity-control button {
-    background-color: #e67e22;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    margin: 0 5px;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-    }
+        .quantity-control button {
+            background-color: #e67e22;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            margin: 0 5px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
 
-    .quantity-control span {
-    min-width: 20px;
-    text-align: center;
-    display: inline-block;
-    }
+        .quantity-control span {
+            min-width: 20px;
+            text-align: center;
+            display: inline-block;
+        }
 
     #orderSummary {
-    margin-top: 30px;
-    width: 100%;
-    border-collapse: collapse;
-    background-color: #fff;
+        margin-top: 30px;
+        width: 100%;
+        border-collapse: collapse;
+        background-color: #fff;
     }
 
-    #orderSummary th,
-    #orderSummary td {
-    border: 1px solid #ccc;
-    padding: 8px;
-    text-align: center;
-    }
+        #orderSummary th,
+        #orderSummary td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: center;
+        }
 
-    #orderSummary th {
-    background-color: #f8d7b3;
-    }
+        #orderSummary th {
+            background-color: #f8d7b3;
+        }
 
     @@media (max-width: 600px) {
-    .item {
-    flex-direction: column;
-    align-items: center;
-    }
+        .item {
+            flex-direction: column;
+            align-items: center;
+        }
 
-    .item-name {
-    margin-bottom: 10px;
-    }
+        .item-name {
+            margin-bottom: 10px;
+        }
 
-    .quantity-control {
-    justify-content: center;
-    }
+        .quantity-control {
+            justify-content: center;
+        }
     }
 </style>
 
@@ -143,7 +144,6 @@
 <form method="post" action="SubmitOrder">
     @foreach (var itemCat in Model)
     {
-        <!-- عصائر -->
         <h2 class="category-header" onclick="toggleCategory(this)">
             <img src="https://cdn-icons-png.flaticon.com/512/1046/1046784.png" alt="عصائر">
             <span>@itemCat.Name</span>
@@ -161,38 +161,19 @@
                         <button type="button" onclick="decrease(this)">−</button>
                         <span>0</span>
                         <button type="button" onclick="increase(this)">+</button>
-                        <input type="hidden" name="items[1].SubcategoryId" value="@item.Id" />
-                        <input type="hidden" name="items[1].Quantity" value="0" />
+
+                        <input type="hidden" name="items[@index].SubcategoryId" value="@item.Id" />
+                        <input type="hidden" name="items[@index].Quantity" value="0" />
+                        <input type="hidden" name="items[@index].Price" value="@item.Price" />
+
+
                     </div>
                 </div>
+                index++;
             }
-           
-        
-       
-    </div>
-    }
-  @*   <!-- حلويات -->
-    <h2 class="category-header" onclick="toggleCategory(this)">
-        <img src="https://cdn-icons-png.flaticon.com/512/2629/2629111.png" alt="حلويات">
-        <span>حلويات</span>
-    </h2>
-    <div class="category-items">
-        <div class="item">
-            <img src="https://images.unsplash.com/photo-1601979041414-6f8be07c9a62" alt="كيك شوكولاتة">
-            <div class="item-info">
-                <div class="item-name">كيك شوكولاتة</div>
-                <div class="item-price">35 جنيه</div>
-            </div>
-            <div class="quantity-control" data-price="35">
-                <button type="button" onclick="decrease(this)">−</button>
-                <span>0</span>
-                <button type="button" onclick="increase(this)">+</button>
-                <input type="hidden" name="items[3].SubcategoryId" value="3" />
-                <input type="hidden" name="items[3].Quantity" value="0" />
-            </div>
         </div>
-    </div>
- *@
+    }
+
     <hr />
     <h3>الإجمالي: <span id="total">0</span> جنيه</h3>
 

@@ -81,6 +81,39 @@
                             </ul>
                         </div>
                     </li>
+
+                    <li class="nav-item">
+                        <a data-bs-toggle="collapse" href="#apiExamples" aria-controls="apiExamples" aria-expanded="false"
+                           class="nav-link collapsed" type="button">
+                            <div class="text-white text-center ms-2 d-flex align-items-center justify-content-center">
+                                <i class="material-icons opacity-10">settings</i>
+                            </div>
+                            <span class="nav-link-text ms-1">@(lang == "ar" ? "بيانات اساسية" : "System Lookups")</span>
+                        </a>
+                        <div id="apiExamples" class="collapse" style="">
+                            <ul class="nav">
+                                <li class="nav-item opacity-75">
+
+                                    <a class="nav-link text-white  @Html.isActive("Index", "Employee")"
+                                       href="@Url.Action("Index", "Employee", new { area = "" })">
+                                        <div class="text-white text-center ms-2 d-flex align-items-center justify-content-center">
+                                            <i class="material-icons opacity-10">apartment</i>&nbsp;
+                                        </div>
+                                        <span class="nav-link-text ms-1">@(lang == "ar" ? "الموظفين" : "Checl list")</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item opacity-75">
+                                    <a class="nav-link text-white  @Html.isActive("Index", "OrderType")"
+                                       href="@Url.Action("Index", "OrderType", new { area = "" })">
+                                        <div class="text-white text-center ms-2 d-flex align-items-center justify-content-center">
+                                            <i class="material-icons opacity-10">location_city</i>&nbsp;
+                                        </div>
+                                        <span class="nav-link-text ms-1">@(lang == "ar" ? "أنواع الطلبات" : "Order Type")</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
                 }
               
             </ul>
