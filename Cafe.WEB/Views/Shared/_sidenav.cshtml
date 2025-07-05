@@ -110,6 +110,14 @@
                                         </div>
                                         <span class="nav-link-text ms-1">@(lang == "ar" ? "أنواع الطلبات" : "Order Type")</span>
                                     </a>
+                                </li>      <li class="nav-item opacity-75">
+                                    <a class="nav-link text-white  @Html.isActive("Index", "EmployeeType")"
+                                       href="@Url.Action("Index", "EmployeeType", new { area = "" })">
+                                        <div class="text-white text-center ms-2 d-flex align-items-center justify-content-center">
+                                            <i class="material-icons opacity-10">location_city</i>&nbsp;
+                                        </div>
+                                        <span class="nav-link-text ms-1">@(lang == "ar" ? "أنواع الموظفين" : " Employee Type")</span>
+                                    </a>
                                 </li>
                             </ul>
                         </div>
