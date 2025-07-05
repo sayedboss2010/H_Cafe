@@ -15,8 +15,8 @@ public class MappingProfile : Profile
         CreateMap<OrderType, OrderTypeVm>().ReverseMap();
         CreateMap<EmployeeType, EmployeeTypeVm>().ReverseMap();
         CreateMap<Employee, EmployeeCafeVm>().ReverseMap();
-
-
+        CreateMap<Table, TableVm>().ReverseMap();
+        CreateMap<Location, LocationCafeVm>().ReverseMap();
 
         //srored result classes
         CreateMap<GetAllEmployeesResult, GetAllEmployeesResultVm>().ReverseMap();

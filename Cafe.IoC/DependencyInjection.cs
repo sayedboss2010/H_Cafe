@@ -2,16 +2,21 @@
 using Cafe.Repository.Repositories.Employee;
 using Cafe.Repository.Repositories.EmployeeType;
 using Cafe.Repository.Repositories.kitchen;
+using Cafe.Repository.Repositories.Location;
 using Cafe.Repository.Repositories.Menu;
 using Cafe.Repository.Repositories.MenuCafe;
 using Cafe.Repository.Repositories.OrderType;
+using Cafe.Repository.Repositories.Table;
 using Cafe.Services.Employee;
 using Cafe.Services.EmployeeType;
 using Cafe.Services.kitchen;
+using Cafe.Services.Location;
 using Cafe.Services.Menu;
 using Cafe.Services.MenuCafe;
 using Cafe.Services.OrderType;
+using Cafe.Services.Table;
 using Cafe.VM.ViewModels;
+using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace Cafe.IoC;
 
@@ -51,6 +56,12 @@ public static class DependencyInjection
         services.AddScoped<IEmployeeRepo, EmployeeRepo>();
         services.AddScoped<IEmployeeService, EmployeeService>();
 
+
+        services.AddScoped<ITableRepo, TableRepo>();
+        services.AddScoped<ITableService, TableService>();
+
+        services.AddScoped<ILocationRepo, LocationRepo>();
+        services.AddScoped<ILocationSerivce, LocationSerivce>();
         //Auto Mapper Configurations
         var mapperConfig = new MapperConfiguration(mc =>
         {
